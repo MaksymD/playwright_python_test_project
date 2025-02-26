@@ -43,7 +43,7 @@ Follow these steps to set up the project:
    Open a terminal and run the following command to clone the repository:
 
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/MaksymD/playwright_python_test_project.git
    
 2. **Create and activate a virtual environment**:  
    Navigate to the project directory and create a virtual environment:
