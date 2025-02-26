@@ -1,0 +1,20 @@
+{
+    "responseCode": 200,
+    "user": {
+        "name": "Max Musterman",
+        "email": "max.mustermann@example.com",
+        "title": "Mr",
+        "birth_day": "1",
+        "birth_month": "1",
+        "birth_year": "1980",
+        "first_name": "Max",
+        "last_name": "Musterman",
+        "company": "MusterCompany",
+        "address1": "Musterstr. 123",
+        "address2": "Musterstr. 123",
+        "country": "Canada",
+        "state": "Toronto",
+        "city": "Musterstadt",
+        "zipcode": "12345"
+    }
+}

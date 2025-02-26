@@ -1,0 +1,124 @@
+pipeline {
+    agent any
+
+    environment {
+        PYTHON_VERSION = '3.9.0'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // TODO: add git URL
+                    git credentialsId: 'GitPat', url: 'https://github.', branch: 'main'
+                }
+            }
+        }
+
+        stage('Setup Environment') {
+            steps {
+                script {
+                    bat 'echo Creating a virtual environment...'
+                    try {
+                        bat 'python -m venv venv'
+                        bat 'venv\\Scripts\\activate'
+                        bat 'pip install build'
+                        bat 'python -m build'
+                        bat 'echo Activating the virtual environment...'
+                        bat 'venv\\Scripts\\activate'
+                    } catch (Exception e) {
+                        currentBuild.result = 'UNSTABLE'
+                    }
+                }
+            }
+        }
+        // TODO: add test
+        stage('Run UI Tests') {
+            steps {
+                script {
+                    try {
+                        bat 'echo running test UI Tests...'
+                        bat 'python -m pytest .\\tests\\test_ui.py > test_ui_output.txt 2>&1'
+                        echo 'Test UI Output:'
+                        echo readFile('test_ui_output.txt.txt')
+                    } catch (Exception e) {
+                        currentBuild.result = 'UNSTABLE'
+                    }
+                }
+            }
+        }
+
+        TODO: add test
+        stage('Run API Tests') {
+            steps {
+                script {
+                    try {
+                        bat 'echo running test API Tests...'
+                        bat 'python -m pytest .\\tests\\test_api.py > test_api_output.txt 2>&1'
+                        echo 'Test API Output:'
+                        echo readFile('test_api_output.txt')
+                    } catch (Exception e) {
+                        currentBuild.result = 'UNSTABLE'
+                    }
+                }
+            }
+        }
+
+    }
+
+    post {
+        always {
+            script {
+                def testsAPI = "UNKNOWN"
+                def testsUI = "UNKNOWN"
+
+                try {
+                    def testsAPI = readFile("test_api_output.txt")
+                    def testsUI = readFile("test_ui_output.txt")
+
+                    if (testsAPI.contains("FAILED")) {
+                        testsAPI = "FAILED"
+                    } else if (testsAPI.contains("PASSED")) {
+                        testsAPI = "PASSED"
+                    }
+
+                    if (testsUI.contains("FAILED")) {
+                        testsUI = "FAILED"
+                    } else if (testsUI.contains("PASSED")) {
+                        testsUI = "PASSED"
+                    }
+
+                    bat 'echo Clean up, deactivate the virtual environment...'
+                    bat 'venv\\Scripts\\deactivate'
+                } catch (Exception e) {
+                    currentBuild.result = 'UNSTABLE'
+                }
+
+                emailext (
+                    subject: "Build Status: ${currentBuild.result} - ${currentBuild.fullProjectName}",
+                    body: """
+                        <p style="font-size: 35px;"><strong>Auto-Test Status:</strong> ${currentBuild.result}</p>
+
+                        <p style="font-size: 20px;"><strong>Tests API</strong></p>
+                        <p style="font-size: 16px;">Test Output:</p>
+                        <pre style="color: ${testsAPI == 'PASSED' ? 'green' : 'red'}; font-size: 12px;">${ readFile("test_api_output.txt") }</pre>
+
+                        <p style="font-size: 35px;">====================================================================</strong></p>
+
+                        <p style="font-size: 20px;"><strong>Tests UI</strong></p>
+                        <p style="font-size: 16px;">Test Output:</p>
+                        <pre style="color: ${testsUI == 'PASSED' ? 'green' : 'red'}; font-size: 12px;">${ readFile("test_ui_output.txt") }</pre>
+
+                        <p style="font-size: 35px;"><strong>====================================================================<strong></p>
+
+                        <p><strong>Build URL:</strong> ${BUILD_URL}</p>
+                        <p><strong>Console Output:</strong> <a href="${BUILD_URL}console">${BUILD_URL}console</a></p>
+                    """,
+                    // TODO: add emails where to send
+                    to: '',
+                    mimeType: 'text/html',
+                )
+            }
+        }
+    }
+}

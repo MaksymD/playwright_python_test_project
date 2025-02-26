@@ -1,0 +1,24 @@
+Metadata-Version: 2.2
+Name: Playwright_Python_Project
+Version: 0.1.0
+Summary: This is a Playwright-based automation project for testing web applications
+Home-page: 
+Author: Maksym Dotsenko
+Author-email: maksym.dotsenko@eviden.com
+Requires-Python: >=3.9.0
+Requires-Dist: allure-pytest==2.13.5
+Requires-Dist: allure-python-commons==2.13.5
+Requires-Dist: anyio==4.0.0
+Requires-Dist: async==0.6.2
+Requires-Dist: httpx==0.18.2
+Requires-Dist: playwright==1.39.0
+Requires-Dist: pytest==7.4.2
+Requires-Dist: pytest-asyncio==0.21.1
+Requires-Dist: pytest-metadata==3.1.1
+Requires-Dist: pytest-playwright==0.5.2
+Requires-Dist: pytest-base-url==2.1.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary

@@ -1,0 +1,126 @@
+# URLs
+urls:
+  main_url: https://automationexercise.com/
+  login_url: https://automationexercise.com/login
+  contact_url: https://automationexercise.com/contact_us
+  create_account_url: https://automationexercise.com/account_created
+  delete_account_url: https://automationexercise.com/delete_account
+  signup_url: https://automationexercise.com/signup
+
+# Credentials
+user_credentials:
+  test_username: max.mustermann@example.com
+  test_password: password
+
+# Browser Configuration
+browser:
+  headless: false
+  browser_type: chrome
+
+# Locators
+locators:
+  ## main Page "/"
+  main_page:
+    user_name: //i/following-sibling::text()[contains(., 'Logged in as')]/following-sibling::b[contains(., 'Max Musterman')]
+  ## navigation-bar
+  navbar:
+    logo_img: //*[@id="header"]//div[contains(@class, 'logo')]//img
+    home_button: //*[@id="header"]//li/a[@href="/"]
+    products_button: //*[@id="header"]//li/a[@href="/products"]
+    cart_button: //*[@id="header"]//li/a[@href="/view_cart"]
+    login_button: //*[@id="header"]//li/a[@href="/login"]
+    logout_button: //*[@id="header"]//li/a[@href="/logout"]
+    delete_button: //*[@id="header"]//li/a[@href="/delete_account"]
+    contact_button: //*[@id="header"]//li/a[@href="/contact_us"]
+  ## footer
+  footer:
+    susbscribe_input: //*[@id="footer"]//input[@id="susbscribe_email"]
+    susbscribe_button: //*[@id="footer"]//button[@id="subscribe"]
+    scrollUp_button: //body/*[@id="scrollUp"]
+
+  ## login Page "/login"
+  login_page:
+    login:
+      email_input: //input[@data-qa="login-email"]
+      password_input: //input[@data-qa="login-password"]
+      login_button: //button[@data-qa="login-button"]
+    signup:
+      name_input: //input[@data-qa="signup-name"]
+      email_input: //input[@data-qa="signup-email"]
+      signup_button: //button[@data-qa="signup-button"]
+
+  ## signup Page "/signup"
+  signup_page:
+    mr_radio: //div[@data-qa="title"]//input[@id="id_gender1"]
+    mrs_radio: //div[@data-qa="title"]//input[@id="id_gender2"]
+    name_input: //input[@data-qa="name"]
+    email_input: //input[@data-qa="email"]
+    password_input: //input[@data-qa="password"]
+    day_select: //select[@data-qa="days"]
+    month_select: //select[@data-qa="months"]
+    year_select: //select[@data-qa="years"]
+    newsletter_checkbox: //input[@id="newsletter" and @type="checkbox"]
+    offer_checkbox: //input[@id="optin" and @type="checkbox"]
+    firstName_input: //input[@data-qa="first_name"]
+    lastName_input: //input[@data-qa="last_name"]
+    company_input: //input[@data-qa="company"]
+    address_input: //input[@data-qa="address"]
+    address2_input: //input[@data-qa="address2"]
+    country_select: //select[@data-qa="country"]
+    state_input: //input[@data-qa="state"]
+    city_input: //input[@data-qa="city"]
+    zipcode_input: //input[@data-qa="zipcode"]
+    mobile_input: //input[@data-qa="mobile_number"]
+    submit_button: //button[@data-qa="create-account"]
+
+  ## create account Page "/account_created"
+  create_account_page:
+    title_created: //h2[@data-qa="account-created"]
+    continue_button: //*[@data-qa="continue-button"]
+
+  ## delete account Page "/delete_account"
+  delete_account_page:
+    title_deleted: //h2[@data-qa="account-deleted"]
+
+  ## contact us Page "/contact_us"
+  contact_page:
+    title_contactForm: //h2[text()="Get In Touch"]
+    name_input: //input[@data-qa="name"]
+    email_input: //input[@data-qa="email"]
+    subject_input: //input[@data-qa="subject"]
+    message_textarea: //textarea[@data-qa="message"]
+    file_input: //input[@name="upload_file"]
+    submit_button: //input[@data-qa="submit-button"]
+    text_send_success: //div[@class="contact-form"]//*[text()="Success! Your details have been submitted successfully."]
+    home_button: //div[@id="form-section"]
+
+# Test Data
+testData:
+  signup_form:
+    full_name: Max Musterman
+    first_name: Max
+    last_name: Musterman
+    company: MusterCompany
+    email: max.mustermann@example.com
+    password: password
+    phone: +00 171 1234567
+    address_street: Musterstr. 123
+    address_city: Musterstadt
+    address_plz: 12345
+    address_country: Toronto
+
+  contact_form:
+    full_name: Max Musterman
+    email: max.mustermann@example.com
+    subject: test subject
+    message: test message
+
+
+page_title:
+  main: "Automation Exercise"
+  signup_login: "Automation Exercise - Signup / Login"
+  signup: "Automation Exercise - Signup"
+  contact: "Automation Exercise - Contact Us"
+  products: "Automation Exercise - All Products"
+  view_cart: "Automation Exercise - Checkout"
+  contact_us: "Automation Exercise - Contact Us"

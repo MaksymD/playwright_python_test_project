@@ -1,0 +1,11 @@
+allure-pytest==2.13.5
+allure-python-commons==2.13.5
+anyio==4.0.0
+async==0.6.2
+httpx==0.18.2
+playwright==1.39.0
+pytest==7.4.2
+pytest-asyncio==0.21.1
+pytest-metadata==3.1.1
+pytest-playwright==0.5.2
+pytest-base-url==2.1.0
