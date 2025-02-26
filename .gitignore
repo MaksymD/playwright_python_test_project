@@ -1,0 +1,25 @@
+# Ignore Allure reports
+allure-results/
+allure-report/
+
+# Ignore virtual environments
+venv/
+.venv/
+
+# Ignore common Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore environment files
+.env
+.venv
+env/
+
+# Ignore IDE-specific files
+.idea/
+.vscode/
+
+# Ignore logs
+*.log
